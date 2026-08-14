@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDS 3D | Impressão 3D e Personalizados</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #1a1a2e;
+            --accent-color: #25d366; /* WhatsApp color */
+            --background-color: #f4f7f6;
+            --text-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.85)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, background 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent-color);
+            margin-left: 10px;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebe57;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-img {
+            height: 220px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-style: italic;
+        }
+
+        .product-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            margin-bottom: 12px;
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+        }
+
+        /* Estilos da nova seção Como Funciona */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+            margin-bottom: 60px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            transition: transform 0.3s;
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .step-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .materials-banner {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 60px 0;
+        }
+
+        .materials-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 50px 5%;
+            text-align: center;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-info p {
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+
+        /* Botão flutuante do WhatsApp */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50px;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .float-wa:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">FDS <span>3D</span></a>
+        <nav>
+            <a href="#miniaturas">Miniaturas & Peças</a>
+            <a href="#como-funciona">Como Funciona</a>
+            <a href="#lembrancinhas">Lembrancinhas</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Suas ideias ganham forma em 3D</h1>
+        <p>Eternize momentos com miniaturas detalhadas e crie lembrancinhas inesquecíveis para seus eventos. Personalização completa com a mais alta tecnologia.</p>
+        <a href="#miniaturas" class="btn">Ver Catálogo</a>
+        <a href="https://wa.me/5511968289161" target="_blank" class="btn btn-whatsapp">Falar no WhatsApp</a>
+    </section>
+
+    <h2 class="section-title" id="miniaturas">Miniaturas & Personalizados</h2>
+    <div class="products-grid">
+        <div class="product-card">
+            <div class="product-img">[Foto: Miniatura de Pet]</div>
+            <div class="product-info">
+                <h3>Seu Pet em 3D</h3>
+                <p>Eternize seu melhor amigo! Fazemos réplicas detalhadas do seu cachorro, gato ou outro animal de estimação.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img">[Foto: Miniatura de Pessoas]</div>
+            <div class="product-info">
+                <h3>Pessoas Queridas</h3>
+                <p>Presenteie com miniaturas personalizadas de quem você ama. Excelente para topos de bolo ou decoração.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img">[Foto: Chaveiros]</div>
+            <div class="product-info">
+                <h3>Chaveiros Exclusivos</h3>
+                <p>Chaveiros com nomes, logos de empresas ou designs únicos feitos sob medida para você.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img">[Foto: Ímãs]</div>
+            <div class="product-info">
+                <h3>Ímãs de Geladeira</h3>
+                <p>Decoração criativa para sua casa ou brindes corporativos marcantes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOVA SEÇÃO: COMO FUNCIONA -->
+    <h2 class="section-title" id="como-funciona">Como Funciona?</h2>
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Envie as Fotos</h3>
+            <p>Nos mande algumas fotos do seu pet ou referência de diferentes ângulos para captarmos cada detalhe.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Modelagem 3D</h3>
+            <p>Nossos artistas digitais criam um modelo 3D exclusivo e fiel ao seu companheiro.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Impressão e Pintura</h3>
+            <p>Imprimimos em alta resolução e pintamos à mão para garantir as cores exatas da sua peça.</p>
+        </div>
+    </div>
+
+    <div class="materials-banner">
+        <h2>Qualidade e Resistência</h2>
+        <p>Utilizamos os melhores filamentos do mercado. Peças rígidas em PLA de alta precisão e materiais flexíveis em TPU para projetos especiais e utilitários em geral.</p>
+    </div>
+
+    <h2 class="section-title" id="lembrancinhas">Lembrancinhas para Eventos</h2>
+    <div class="products-grid">
+        <div class="product-card">
+            <div class="product-img">[Foto: Chá de Bebê]</div>
+            <div class="product-info">
+                <h3>Chá de Bebê e Revelação</h3>
+                <p>Pezinhos, chupetas, chaveirinhos com o nome do bebê e mimos delicados para encantar seus convidados.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img">[Foto: Aniversários]</div>
+            <div class="product-info">
+                <h3>Festas de Aniversário</h3>
+                <p>Brindes temáticos, personagens e caixinhas personalizadas para deixar a festa ainda mais divertida.</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img">[Foto: Casamentos]</div>
+            <div class="product-info">
+                <h3>Casamentos</h3>
+                <p>Topos de bolo inesquecíveis, marcadores de mesa elegantes e lembranças exclusivas para os padrinhos.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contato">
+        <h2>FDS 3D - Impressão 3D</h2>
+        <div class="social-links">
+            <a href="https://instagram.com/fds3d2026" target="_blank">Instagram: @fds3d2026</a> | 
+            <a href="https://fds3d2026.com.br" target="_blank">Site: fds3d2026.com.br</a>
+        </div>
+        <div class="footer-info">
+            <p>Atendimento online e entregas focadas em todo Brasil.</p>
+            <p>WhatsApp: (11) 96828-9161</p>
+            <p>&copy; 2026 FDS 3D. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5511968289161" class="float-wa" target="_blank">
+        💬 Orçamento via WhatsApp
+    </a>
+
+</body>
+</html>
