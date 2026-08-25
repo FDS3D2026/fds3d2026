@@ -4,24 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FDS 3D | Impressão 3D e Personalizados</title>
+    <!-- Adicionando uma fonte moderna do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-color: #007bff;
+            --primary-dark: #0056b3;
             --secondary-color: #1a1a2e;
-            --accent-color: #25d366; /* WhatsApp color */
-            --background-color: #f4f7f6;
+            --accent-color: #25d366; /* Cor do WhatsApp */
+            --background-color: #f8f9fa;
             --text-color: #333;
+            --card-bg: #ffffff;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
@@ -31,7 +37,8 @@
         }
 
         header {
-            background-color: var(--secondary-color);
+            background-color: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 15px 5%;
             display: flex;
@@ -40,7 +47,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .logo {
@@ -49,6 +56,11 @@
             color: white;
             text-decoration: none;
             letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo span {
@@ -60,93 +72,142 @@
             text-decoration: none;
             margin-left: 25px;
             font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--primary-color);
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--primary-color);
         }
 
         .hero {
-            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.85)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1920&q=80') center/cover;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1920&q=80') center/cover;
             color: white;
             text-align: center;
-            padding: 120px 20px;
+            padding: 140px 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero h1 {
             font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .hero p {
             font-size: 1.2rem;
+            font-weight: 300;
             max-width: 700px;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
+            color: #e0e0e0;
         }
 
         .btn {
             background-color: var(--primary-color);
             color: white;
-            padding: 15px 35px;
+            padding: 12px 35px;
             text-decoration: none;
             border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.3s, background 0.3s;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
             display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+            margin: 5px;
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background-color: var(--primary-dark);
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
         }
 
         .btn-whatsapp {
             background-color: var(--accent-color);
-            margin-left: 10px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
         }
 
         .btn-whatsapp:hover {
             background-color: #1ebe57;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
         }
 
         .section-title {
             text-align: center;
-            margin: 60px 0 40px;
-            font-size: 2.5rem;
+            margin: 80px 0 50px;
+            font-size: 2.2rem;
+            font-weight: 700;
             color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            display: block;
+            margin: 15px auto 0;
+            border-radius: 2px;
         }
 
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 35px;
             padding: 0 5%;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         .product-card {
-            background: white;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
         }
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
         }
 
-        .product-img {
-            height: 220px;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-style: italic;
+        .img-container {
+            overflow: hidden;
+        }
+
+        img.product-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img.product-img {
+            transform: scale(1.1);
         }
 
         .product-info {
@@ -158,26 +219,30 @@
             margin-bottom: 12px;
             color: var(--secondary-color);
             font-size: 1.3rem;
+            font-weight: 600;
         }
 
-        /* Estilos da nova seção Como Funciona */
+        .product-info p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 35px;
             padding: 0 5%;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         .step-card {
-            background: white;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: 15px;
             padding: 40px 25px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: transform 0.3s;
-            border-bottom: 4px solid var(--primary-color);
+            border-bottom: 5px solid var(--primary-color);
         }
 
         .step-card:hover {
@@ -185,68 +250,96 @@
         }
 
         .step-number {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            font-weight: bold;
-            margin: 0 auto 20px;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            font-weight: 700;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
         }
 
         .step-card h3 {
             color: var(--secondary-color);
             margin-bottom: 15px;
             font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .materials-banner {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             text-align: center;
-            padding: 50px 20px;
-            margin: 60px 0;
+            padding: 70px 20px;
+            margin: 80px 0;
+            box-shadow: 0 inset 0 10px rgba(0,0,0,0.1);
         }
 
         .materials-banner h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .materials-banner p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         footer {
             background-color: var(--secondary-color);
             color: white;
-            padding: 50px 5%;
+            padding: 60px 5% 40px;
             text-align: center;
         }
 
+        footer h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
         .social-links {
-            margin: 20px 0;
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         .social-links a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .social-links a:hover {
             color: var(--primary-color);
         }
 
-        .footer-info p {
-            margin-bottom: 10px;
-            color: #aaa;
+        .footer-info {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            margin-top: 25px;
         }
 
-        /* Botão flutuante do WhatsApp */
+        .footer-info p {
+            margin-bottom: 8px;
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
         .float-wa {
             position: fixed;
             bottom: 30px;
@@ -256,26 +349,53 @@
             border-radius: 50px;
             padding: 15px 25px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             z-index: 1000;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulse 2s infinite;
         }
 
         .float-wa:hover {
             transform: scale(1.05);
+            background-color: #1ebe57;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 gap: 15px;
+                padding: 15px;
+            }
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
             }
             nav a {
-                margin: 0 10px;
+                margin: 0;
+                font-size: 0.9rem;
             }
             .hero h1 {
                 font-size: 2.5rem;
+            }
+            .hero {
+                padding: 100px 20px;
+            }
+            .social-links {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -295,43 +415,54 @@
     <section class="hero">
         <h1>Suas ideias ganham forma em 3D</h1>
         <p>Eternize momentos com miniaturas detalhadas e crie lembrancinhas inesquecíveis para seus eventos. Personalização completa com a mais alta tecnologia.</p>
-        <a href="#miniaturas" class="btn">Ver Catálogo</a>
-        <a href="https://wa.me/5511968289161" target="_blank" class="btn btn-whatsapp">Falar no WhatsApp</a>
+        <div>
+            <a href="#miniaturas" class="btn">Ver Catálogo</a>
+            <a href="https://wa.me/5511968289161" target="_blank" class="btn btn-whatsapp">Falar no WhatsApp</a>
+        </div>
     </section>
 
     <h2 class="section-title" id="miniaturas">Miniaturas & Personalizados</h2>
     <div class="products-grid">
         <div class="product-card">
-            <div class="product-img">[Foto: Miniatura de Pet]</div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?auto=format&fit=crop&w=600&q=80" alt="Miniatura de Pet 3D" class="product-img">
+            </div>
             <div class="product-info">
                 <h3>Seu Pet em 3D</h3>
                 <p>Eternize seu melhor amigo! Fazemos réplicas detalhadas do seu cachorro, gato ou outro animal de estimação.</p>
             </div>
         </div>
         <div class="product-card">
-            <div class="product-img">[Foto: Miniatura de Pessoas]</div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Miniatura de Pessoas" class="product-img">
+            </div>
             <div class="product-info">
                 <h3>Pessoas Queridas</h3>
                 <p>Presenteie com miniaturas personalizadas de quem você ama. Excelente para topos de bolo ou decoração.</p>
             </div>
         </div>
         <div class="product-card">
-            <div class="product-img">[Foto: Chaveiros]</div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?auto=format&fit=crop&w=600&q=80" alt="Chaveiros Personalizados 3D" class="product-img">
+            </div>
             <div class="product-info">
                 <h3>Chaveiros Exclusivos</h3>
                 <p>Chaveiros com nomes, logos de empresas ou designs únicos feitos sob medida para você.</p>
             </div>
         </div>
+        
+        <!-- ÍMÃS DE GELADEIRA - AGORA COM UMA IMAGEM CLÁSSICA DE ÍMÃS (LETRAS NA GELADEIRA) -->
         <div class="product-card">
-            <div class="product-img">[Foto: Ímãs]</div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=600&q=80" alt="Ímãs de Geladeira" class="product-img">
+            </div>
             <div class="product-info">
                 <h3>Ímãs de Geladeira</h3>
-                <p>Decoração criativa para sua casa ou brindes corporativos marcantes.</p>
+                <p>Decoração criativa para sua casa ou brindes corporativos marcantes, totalmente personalizados.</p>
             </div>
         </div>
     </div>
 
-    <!-- NOVA SEÇÃO: COMO FUNCIONA -->
     <h2 class="section-title" id="como-funciona">Como Funciona?</h2>
     <div class="steps-grid">
         <div class="step-card">
@@ -359,21 +490,29 @@
     <h2 class="section-title" id="lembrancinhas">Lembrancinhas para Eventos</h2>
     <div class="products-grid">
         <div class="product-card">
-            <div class="product-img">[Foto: Chá de Bebê]</div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80" alt="Lembrancinha Chá de Bebê" class="product-img">
+            </div>
             <div class="product-info">
                 <h3>Chá de Bebê e Revelação</h3>
                 <p>Pezinhos, chupetas, chaveirinhos com o nome do bebê e mimos delicados para encantar seus convidados.</p>
             </div>
         </div>
+        
         <div class="product-card">
-            <div class="product-img">[Foto: Aniversários]</div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" alt="Lembrancinhas de Aniversário" class="product-img">
+            </div>
             <div class="product-info">
                 <h3>Festas de Aniversário</h3>
                 <p>Brindes temáticos, personagens e caixinhas personalizadas para deixar a festa ainda mais divertida.</p>
             </div>
         </div>
+        
         <div class="product-card">
-            <div class="product-img">[Foto: Casamentos]</div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&q=80" alt="Lembrancinhas de Casamento" class="product-img">
+            </div>
             <div class="product-info">
                 <h3>Casamentos</h3>
                 <p>Topos de bolo inesquecíveis, marcadores de mesa elegantes e lembranças exclusivas para os padrinhos.</p>
@@ -384,11 +523,11 @@
     <footer id="contato">
         <h2>FDS 3D - Impressão 3D</h2>
         <div class="social-links">
-            <a href="https://instagram.com/fds3d2026" target="_blank">Instagram: @fds3d2026</a> | 
-            <a href="https://fds3d2026.com.br" target="_blank">Site: fds3d2026.com.br</a>
+            <a href="https://instagram.com/fds3d2026" target="_blank">📷 Instagram: @fds3d2026</a>
+            <a href="https://fds3d2026.com.br" target="_blank">🌐 Site: fds3d2026.com.br</a>
         </div>
         <div class="footer-info">
-            <p>Atendimento online e entregas focadas em todo Brasil.</p>
+            <p>Atendimento online e entregas focadas em São Paulo, Vila Medeiros e região.</p>
             <p>WhatsApp: (11) 96828-9161</p>
             <p>&copy; 2026 FDS 3D. Todos os direitos reservados.</p>
         </div>
